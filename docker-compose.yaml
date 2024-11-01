@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: message-consumer
+    container_name: message-consumer
+    networks:
+      - kafkan
+
+networks:
+  kafkan:
+    external: true
