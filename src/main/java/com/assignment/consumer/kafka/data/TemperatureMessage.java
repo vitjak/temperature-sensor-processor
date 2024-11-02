@@ -8,5 +8,5 @@ public class TemperatureMessage {
     private String latitude;
     private int elevation;
     private long timestamp;
-    private double temperature;
+    private float temperature;
 }
