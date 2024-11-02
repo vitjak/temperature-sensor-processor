@@ -22,3 +22,5 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: "192.168.64.105:9092"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
