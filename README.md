@@ -1,20 +1,31 @@
-# Getting Started
+# Temperature Sensor Processor
 
-### Reference Documentation
+## Overview
 
-For further reference, please consider the following sections:
+The Temperature Sensor Processor is a Kafka consumer application designed to process temperature data from various
+sensors. It consumes messages from a Kafka topic with multiple partitions and updates the latest temperature readings
+for each sensor based on the provided timestamp and temperature values.
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.5/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.5/maven-plugin/build-image.html)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.3.5/reference/using/devtools.html)
-* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/3.3.5/reference/messaging/kafka.html)
+To use application you can build image locally:
+`docker build -t message-consumer .`
 
-### Maven Parent overrides
+or just use image that is built via GitHub actions:
+`docker pull ghcr.io/vitjak/message-consumer:latest`
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the
-parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+## Configuration
 
+The application uses two env variables as input:
+
+- `KAFKA_BOOTSTRAP_SERVERS` which sets the IP of the Kafka instance the consumer will connect to
+- `SPRING_PROFILES_ACTIVE` which sets the profile that is only used for log display (structured for 'prod' and plain
+  console for 'dev')
+
+## Running the Application
+
+To run the application using Docker, use the following command, ensuring to set the necessary environment variables:
+`docker run -e KAFKA_BOOTSTRAP_SERVERS=<your_kafka_ip> -e SPRING_PROFILES_ACTIVE=<profile> ghcr.io/vitjak/message-consumer:latest`
+
+## Conclusion
+
+To test locally I used a separate project which generated random messages and sent them to kafka topic with 96
+partitions. Then I used `deployment.yaml` file to deploy the consumer in a Minikube instance.
