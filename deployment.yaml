@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: message-consumer
-          image: vklooney/message-consumer:latest
+          image: ghcr.io/vitjak/message-consumer:latest
           ports:
             - containerPort: 8080
           env:
