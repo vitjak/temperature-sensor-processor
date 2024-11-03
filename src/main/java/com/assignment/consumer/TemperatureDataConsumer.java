@@ -77,4 +77,8 @@ public class TemperatureDataConsumer {
                     .log("Error processing message: " + e.getMessage(), e);
         }
     }
+
+    public ConcurrentHashMap<String, TemperatureMessage> getLatestTemperatures() {
+        return latestTemperatures;
+    }
 }
